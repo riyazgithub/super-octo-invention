@@ -1,45 +1,46 @@
+import com.helper.TreeNode;
 
-public class Solution {
+class Solution {
 
-  public void dfs(int[][] friendship,int[] visited, int i) {
-    for(int j=0;j<friendship.length; j++) {
-      if(friendship[i][j]==1 && visited[j] == 0){
-        visited[j] =1;
-        dfs(friendship,visited,j);
-      }
-    }
-  }
-  public int findCircleNum(int[][] M) {
-    int[] visited = new int[M.length];
-    int count = 0;
-    for(int i=0;i<M.length;i++){
-      if(visited[i]==0) {
-        dfs(M, visited,i);
-        count++;
-      }
-    }
-    return count;
 
+  public TreeNode insertIntoBST(TreeNode root, int val) {
+    root = insertRecursive(root,val);
+    return root;
   }
 
+  private TreeNode insertRecursive(TreeNode treeNode, int newVal) {
+    if(treeNode==null) {
+      return new TreeNode(newVal);
+    } else if(treeNode.data > newVal) {
+      treeNode.left = insertRecursive(treeNode.left,newVal);
+    }else if(treeNode.data < newVal){
+      treeNode.right = insertRecursive(treeNode.right, newVal);
+    }else {
+      return treeNode;
+    }
+    return treeNode;
+  }
 
+  public void inorderTraversal(TreeNode treeNode){
+    if(treeNode == null)
+      return;
+    inorderTraversal(treeNode.left);
+    System.out.print(treeNode.data + " ");
+    inorderTraversal(treeNode.right);
+  }
 
   public static void main(String[] args) {
     Solution solution = new Solution();
-    int [][] sampleInput = {{1,1,0},
-        {1,1,0},
-        {0,0,1}};
-//    System.out.println(solution.findCircleNum(sampleInput));
-    BinaryTree tree = new BinaryTree();
-    tree.root = BinaryTree.insertionRecursive(tree.root, 24);
-    tree.root = BinaryTree.insertionRecursive(tree.root, 2);
-    tree.root = BinaryTree.insertionRecursive(tree.root, 33);
-    tree.root = BinaryTree.insertionRecursive(tree.root, 11);
-
-
-    BinaryTree.printInorderTraversal(tree.root);
-
-
+    TreeNode root = solution.insertRecursive(null, 10);
+    root = solution.insertIntoBST(root,1);
+    root = solution.insertIntoBST(root,2);
+    root = solution.insertIntoBST(root,11);
+    root = solution.insertIntoBST(root,5);
+    root = solution.insertIntoBST(root,19);
+    root = solution.insertIntoBST(root,13);
+    System.out.println();
+    solution.inorderTraversal(root);
+    System.out.println();
 
   }
 }
