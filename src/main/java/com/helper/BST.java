@@ -11,9 +11,9 @@ public class BST {
   public TreeNode insertRecursive(TreeNode treeNode, int newVal) {
     if(treeNode==null) {
       return new TreeNode(newVal);
-    } else if(treeNode.data > newVal) {
+    } else if(treeNode.val > newVal) {
       treeNode.left = insertRecursive(treeNode.left,newVal);
-    }else if(treeNode.data < newVal){
+    }else if(treeNode.val < newVal){
       treeNode.right = insertRecursive(treeNode.right, newVal);
     }else {
       return treeNode;
@@ -25,7 +25,7 @@ public class BST {
     if(treeNode == null)
       return;
     inorderTraversal(treeNode.left);
-    System.out.print(treeNode.data + " ");
+    System.out.print(treeNode.val + " ");
     inorderTraversal(treeNode.right);
   }
 }
