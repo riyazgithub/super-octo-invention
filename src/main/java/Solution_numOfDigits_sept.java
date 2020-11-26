@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution {
+public class Solution_numOfDigits_sept {
   public boolean isArmstrong(int N) {
     boolean isArm = true;
     int numberOfDigits = getNumberOfDigits(N);
@@ -32,7 +32,7 @@ public class Solution {
   }
 
   public static void main(String[] args) {
-	Solution solution = new Solution();
-	System.out.println(solution.isArmstrong(1145));
+	Solution_numOfDigits_sept solutionNumOfDigitssept = new Solution_numOfDigits_sept();
+	System.out.println(solutionNumOfDigitssept.isArmstrong(1145));
   }
 }

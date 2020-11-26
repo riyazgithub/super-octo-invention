@@ -1,0 +1,136 @@
+[
+  {
+    "key": "NA14",
+    "location": "NA",
+    "environment": "production",
+    "releaseVersion": "Spring '17 Patch 13.1",
+    "releaseNumber": "",
+    "status": "OK",
+    "isActive": false,
+    "city": "",
+    "stateName": "",
+    "stateCode": "",
+    "countryName": "",
+    "countryCode": "",
+    "maintenanceWindow": "",
+    "Services": [
+      {
+        "key": "coreService",
+        "order": 1,
+        "isCore": true
+      },
+      {
+        "key": "liveAgent",
+        "order": 20,
+        "isCore": false
+      },
+      {
+        "key": "search",
+        "order": 5,
+        "isCore": false
+      },
+      {
+        "key": "analytics",
+        "order": 10,
+        "isCore": false
+      },
+      {
+        "key": "CPQandBilling",
+        "order": 100,
+        "isCore": false
+      },
+      {
+        "key": "EinsteinBots",
+        "order": 110,
+        "isCore": false
+      },
+      {
+        "key": "Communities",
+        "order": 200,
+        "isCore": false
+      }
+    ],
+    "Products": [
+      {
+        "key": "Salesforce_Services",
+        "order": 0,
+        "isActive": true
+      }
+    ],
+    "Tags": []
+  },
+  {
+    "key": "NA88",
+    "location": "NA",
+    "environment": "production",
+    "releaseVersion": "Summer '20 Patch 20.24",
+    "releaseNumber": "226.20.24",
+    "status": "OK",
+    "isActive": true,
+    "city": "Ashburn",
+    "stateName": "Virginia",
+    "stateCode": "VA",
+    "countryName": "United States",
+    "countryCode": "US",
+    "maintenanceWindow": "Sundays 12:00 AM - 4:00 AM PST",
+    "Services": [
+      {
+        "key": "coreService",
+        "order": 1,
+        "isCore": true
+      },
+      {
+        "key": "liveAgent",
+        "order": 20,
+        "isCore": false
+      },
+      {
+        "key": "search",
+        "order": 5,
+        "isCore": false
+      },
+      {
+        "key": "analytics",
+        "order": 10,
+        "isCore": false
+      },
+      {
+        "key": "CPQandBilling",
+        "order": 100,
+        "isCore": false
+      },
+      {
+        "key": "EinsteinBots",
+        "order": 110,
+        "isCore": false
+      },
+      {
+        "key": "Communities",
+        "order": 200,
+        "isCore": false
+      }
+    ],
+    "Products": [
+      {
+        "key": "Salesforce_Services",
+        "order": 0,
+        "isActive": true
+      }
+    ],
+    "Tags": [
+      {
+        "id": 79,
+        "value": "ORD-SP1",
+        "type": "superpod",
+        "createdAt": "2020-07-09T15:59:31.096Z",
+        "updatedAt": "2020-07-09T15:59:31.096Z",
+        "InstanceTag": {
+          "createdAt": "2020-07-09T16:12:40.589Z",
+          "updatedAt": "2020-07-09T16:12:40.589Z",
+          "InstanceKey": "NA88",
+          "TagId": 79
+        }
+      }
+    ]
+  },
+  ]
