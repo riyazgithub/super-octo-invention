@@ -1,7 +1,7 @@
 package Nov;
 
 // Partially correct
-public class Solution {
+public class ConvertAtoI {
 
 
   public int myAtoi(String s) {
@@ -102,8 +102,8 @@ public class Solution {
   }
 
   public static void main(String[] args) {
-    Solution solution = new Solution();
-	System.out.println(solution.myAtoi("-6147483648"));
+    ConvertAtoI convertAtoI = new ConvertAtoI();
+	System.out.println(convertAtoI.myAtoi("-6147483648"));
 	int i = -2147483646;
 	System.out.println(i-100);
     
