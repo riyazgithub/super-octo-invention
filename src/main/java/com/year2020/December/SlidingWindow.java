@@ -1,6 +1,4 @@
-package December;
-
-import java.util.Arrays;
+package com.year2020.December;
 
 public class SlidingWindow {
  public static double[] findAverages(int K, int[] arr) {
@@ -55,7 +53,6 @@ public class SlidingWindow {
    return sizeOfSubArray;
 
   }
-
   public static void main(String[] args) {
 //	double[] result = SlidingWindow.findAverages(5, new int[] { 1, 3, 2, 6, -1, 4, 1, 8, 2 });
 //	System.out.println("Averages of subarrays of size K: " + Arrays.toString(result));
