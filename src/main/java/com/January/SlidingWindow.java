@@ -17,16 +17,20 @@ public class SlidingWindow {
 	HashMap<Character, Integer> hm = new HashMap<>();
 	int windowEnd = 0;
 	int windowStart = 0;
-	for (int i = 0; i<multiChar.length && windowEnd < multiChar.length; i++) {
-	  while (windowEnd < multiChar.length && hm.size() < k && i < multiChar.length) {
+	for (int i = 0; i<multiChar.length && windowEnd < multiChar.length && hm.size() <= k; i++) {
+	  while (windowEnd < multiChar.length && i < multiChar.length) {
 		if (hm.containsKey(multiChar[windowEnd])) {
 		  Integer getVal = hm.get(multiChar[windowEnd]);
 		  getVal++;
 		  hm.put(multiChar[windowEnd], getVal);
-		} else {
+		  windowEnd++;
+		} else if(hm.size() < k ){
 		  hm.put(multiChar[windowEnd], 1);
+		  windowEnd++;
 		}
-		windowEnd++;
+		else
+		  break;
+
 	  }
 	  //update the distinct char len if len of return string is long
 	  if(returnVal < windowEnd-windowStart)
@@ -49,8 +53,14 @@ public class SlidingWindow {
 
   public static void main(String[] args) {
 	System.out.println("Longest Substring with K Distinct Characters (medium)");
-	String inputStr = new String("cbbebi");
-	int distinctChar = 3;
+	String inputStr = new String("araaci");
+	int distinctChar = 2;
+	System.out.println("Sliding Window Length "+SlidingWindow.findLength(inputStr, distinctChar));
+	inputStr = new String("cbbebi");
+	distinctChar = 3;
+	System.out.println("Sliding Window Length "+SlidingWindow.findLength(inputStr, distinctChar));
+	inputStr = new String("aa");
+	distinctChar = 1;
 	System.out.println("Sliding Window Length "+SlidingWindow.findLength(inputStr, distinctChar));
 
   }
