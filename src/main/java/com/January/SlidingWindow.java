@@ -8,7 +8,8 @@ public class SlidingWindow {
 
   public static int findLength(String str, int k) {
 	char[] multiChar = str.toCharArray();
-	int returnInt = findLengthHelper(multiChar, k);
+	int returnInt = findLengthHelper(multiChar, 2);
+	System.out.println("Return Int "+ returnInt +" For "+str);
 	return returnInt;
   }
 
