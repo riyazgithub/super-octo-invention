@@ -55,8 +55,10 @@ public class readingFromPDF {
 	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfo.entrySet()) {
 	  System.out.println("File Name "+eachME.getKey());
 	  for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
-		if(!eachME1.getKey().equals("PortFolioValue"))
-	    System.out.println(eachME1.getValue());
+		if(!eachME1.getKey().equals("PortFolioValue")){
+		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
+		}
+
 	  }
 	  System.out.println("Portfolio Value "+eachME.getValue().get("PortFolioValue"));
 	  System.out.println(DELIMITER);
@@ -106,12 +108,12 @@ public class readingFromPDF {
 	if(eachLine.contains("Estimated"))
 	{
 	  tickerSymbols.add(words[3]);
-	  portfolioShare.put(words[3], words[9]);
+	  portfolioShare.put(words[3], words[9] +" : "+words[5]);
 	}
 	else
 	{
 	  tickerSymbols.add(words[0]);
-	  portfolioShare.put(words[0], words[6]);
+	  portfolioShare.put(words[0], words[6] +" : "+words[2]);
 	}
   }
 
