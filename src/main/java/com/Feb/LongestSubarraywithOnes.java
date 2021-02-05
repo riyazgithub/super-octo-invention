@@ -6,7 +6,7 @@ public class LongestSubarraywithOnes {
 
   public static int findLength(int[] arr, int k) {
 
-    int output = LongestSubarraywithOnes.findLengthHelper(arr,k,1);
+    int output = findLengthHelper(arr,k,1);
 	return output;
   }
 
@@ -17,21 +17,23 @@ public class LongestSubarraywithOnes {
 	int windowStart = 0;
 	// initializing hasmap
 	hm.put(1,0);hm.put(0,0);
-	for (int i = 0; i<multiChar.length && windowEnd < multiChar.length && hm.get(1) <= k; i++) {
+	for (int i = 0; i<multiChar.length && windowEnd < multiChar.length ; i++) {
 	  while (windowEnd < multiChar.length && i < multiChar.length) {
-		if (hm.containsKey(multiChar[windowEnd])) {
+
 		  Integer getVal = hm.get(multiChar[windowEnd]);
 		  getVal++;
-		  hm.put(multiChar[windowEnd], getVal);
-		  windowEnd++;
+		  if(multiChar[windowEnd]==0 && getVal>k)
+		    break;
+		  else {
+			hm.put(multiChar[windowEnd], getVal);
+			windowEnd++;
+		  }
 		}
-		else
-		  break;
-	  }
+
 	  //update the distinct char len if len of return string is long
 	  if(returnVal < windowEnd-windowStart)
 		returnVal = windowEnd-windowStart;
-	  System.out.println("Hashmap range "+hm+" When return value "+returnVal);
+//	  System.out.println("Hashmap range "+hm+" When return value "+returnVal);
 	  // move windowstart and update the hashmap
 	  if(hm.get(multiChar[windowStart]) == 1)
 		hm.put(multiChar[windowStart],0);

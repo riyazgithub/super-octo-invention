@@ -8,6 +8,7 @@ public class PregDateTicker {
   public static void main(String[] args) {
 	Date date = new Date();
 	long timeMilli = 1612502900100l; // start time Feb 4
+	int startWeeks = 24;
 	System.out.println("Current Time "+timeMilli);
 
 	long currentTime = date.getTime();
@@ -25,11 +26,11 @@ public class PregDateTicker {
 	long difference = currentTime-timeMilli;
 	long perDayMilliSecs = 60*60*24*1000;
 
-	int startWeeks = 24;
+
 	int numberofDays = (int) (difference / perDayMilliSecs);
 	int numberOfWeeks =  (numberofDays / 7);
 	System.out.println("Number of Days "+numberofDays);
-	System.out.println("Current Week "+(numberOfWeeks + startWeeks));
+	System.out.println("Current Week "+(numberOfWeeks + startWeeks)+" and days "+(numberofDays - (numberOfWeeks*7)));
 
   }
 
