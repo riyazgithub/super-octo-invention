@@ -4,9 +4,15 @@ import java.util.HashMap;
 
 public class permutationInAString {
 
+  /*
+Input: String="oidbcaf", Pattern="abc"
+Output: true
+Explanation: The string contains "bca" which is a permutation of the given pattern.
+   */
   public static boolean findPermutation(String str, String pattern) {
-    HashMap<Character, Integer> hm = new HashMap<>();
-    populateHM(hm, pattern);
+    HashMap<Character, Integer> hmPattern = new HashMap<>();
+    populateHM(hmPattern, pattern);
+    System.out.println("Pattern HM "+hmPattern);
     return false;
   }
 
@@ -24,7 +30,7 @@ public class permutationInAString {
 
   public static void main(String[] args) {
     String inputStr = "oidbcaf";
-    String pattern = "abc";
+    String pattern = "abca";
     System.out.println("Permutation "+findPermutation(inputStr, pattern));
   }
 }

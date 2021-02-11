@@ -28,7 +28,8 @@ public class readingFromPDF {
 	  "/Users/rafthab/Downloads/Robinhood/Nov2020.pdf",
 	  "/Users/rafthab/Downloads/Robinhood/Dec2020.pdf",
 	  "/Users/rafthab/Downloads/Robinhood/APR2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/MAY2020.pdf"
+	  "/Users/rafthab/Downloads/Robinhood/MAY2020.pdf",
+	  "/Users/rafthab/Downloads/Robinhood/Jan2021.pdf"
   };
 
   public static final String DELIMITER = "========================================================";
@@ -56,7 +57,8 @@ public class readingFromPDF {
 	  System.out.println("File Name "+eachME.getKey());
 	  for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
 		if(!eachME1.getKey().equals("PortFolioValue")){
-		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
+//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
+		  System.out.println(eachME1.getValue());
 		}
 
 	  }
@@ -108,12 +110,14 @@ public class readingFromPDF {
 	if(eachLine.contains("Estimated"))
 	{
 	  tickerSymbols.add(words[3]);
-	  portfolioShare.put(words[3], words[9] +" : "+words[5]);
+//	  portfolioShare.put(words[3], words[9] +" : "+words[5]);
+	  portfolioShare.put(words[3], words[9]);
 	}
 	else
 	{
 	  tickerSymbols.add(words[0]);
-	  portfolioShare.put(words[0], words[6] +" : "+words[2]);
+//	  portfolioShare.put(words[0], words[6] +" : "+words[2]);
+	  portfolioShare.put(words[0], words[6]);
 	}
   }
 
