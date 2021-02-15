@@ -34,6 +34,19 @@ public class readingFromPDF {
 
   public static final String DELIMITER = "========================================================";
 
+  // TODO: Need to remove the below stocks
+  /*
+  *
+  * AAPL
+EXPE
+IPOC
+LUV
+RDS.B
+SSTI
+TRIP
+WORK
+  * */
+
   public static void main(String args[]) throws IOException {
 	TreeMap<String,TreeMap<String, String>> theWholeInfo = new TreeMap<>();
 	SortedSet<String> tickerSymbols = new TreeSet<>();
