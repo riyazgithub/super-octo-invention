@@ -29,6 +29,14 @@ public class MinimumWindowSubstring {
 		charFrequencyMap.put(rightChar, charFrequencyMap.get(rightChar) - 1);
 		if (charFrequencyMap.get(rightChar) == 0) // character is completely matched
 		  matched++;
+		else if (charFrequencyMap.get(rightChar) < 0) {
+		  char leftChar = str.charAt(windowStart);
+		  if (charFrequencyMap.containsKey(leftChar)) {
+			// increment the frequency of the matched character
+			charFrequencyMap.put(rightChar, charFrequencyMap.get(leftChar) + 1);
+		  }
+		  windowStart++;
+		}
 	  }
 
 	  if (matched == charFrequencyMap.size())
@@ -54,6 +62,7 @@ public class MinimumWindowSubstring {
   public static void main(String[] args) {
 	System.out.println("Permutation exist: " + MinimumWindowSubstring.findSubstring("aabdec", "abc"));
 	System.out.println("Permutation exist: " + MinimumWindowSubstring.findSubstring("abdbca", "abc"));
+	System.out.println("Permutation exist: " + MinimumWindowSubstring.findSubstring("adcad", "abc"));
   }
 
 
