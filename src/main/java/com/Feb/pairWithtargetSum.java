@@ -21,9 +21,9 @@ public class pairWithtargetSum {
 
   public static void main(String[] args) {
 	int[] targetIndices = pairWithtargetSum.search(new int[] { 1,2,3,4,5,6 }, 6);
-	System.out.println("Result index 0 "+targetIndices[0]+" 1 "+targetIndices[1]);
+	System.out.println("Result index "+targetIndices[0]+" "+targetIndices[1]);
 	targetIndices = pairWithtargetSum.search(new int[] { 2,5,9,11 }, 11);
-	System.out.println("Result index 0 "+targetIndices[0]+" 1 "+targetIndices[1]);
+	System.out.println("Result index "+targetIndices[0]+" "+targetIndices[1]);
   }
 
 }

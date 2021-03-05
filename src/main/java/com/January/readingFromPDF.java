@@ -16,20 +16,21 @@ import org.apache.pdfbox.text.PDFTextStripper;
 public class readingFromPDF {
 
   public static final String[] FILES = {
-	  "/Users/rafthab/Downloads/Robinhood/Dec2019.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Jan2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Feb2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Mar2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Jun2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Jul2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Aug2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/SEP2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Oct2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Nov2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Dec2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/APR2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/MAY2020.pdf",
-	  "/Users/rafthab/Downloads/Robinhood/Jan2021.pdf"
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Dec2019.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Jan2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Feb2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Mar2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/APR2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/MAY2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Jun2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Aug2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/SEP2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Oct2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Nov2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Dec2020.pdf",
+//	  "/Users/rafthab/Downloads/Finance/Robinhood/Jan2021.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Feb2021.pdf"
   };
 
   public static final String DELIMITER = "========================================================";
@@ -48,38 +49,52 @@ WORK
   * */
 
   public static void main(String args[]) throws IOException {
-	TreeMap<String,TreeMap<String, String>> theWholeInfo = new TreeMap<>();
+	TreeMap<String,TreeMap<String, String>> theWholeInfoPercent = new TreeMap<>();
+	TreeMap<String,TreeMap<String, String>> theWholeInfoShares = new TreeMap<>();
 	SortedSet<String> tickerSymbols = new TreeSet<>();
 	for (String eachFile : FILES) {
 //	  System.out.println(eachFile);
-	  TreeMap<String, String> portfolioShare =  new TreeMap<>();
-	  parseRobinMonthlyDoc(eachFile, tickerSymbols, portfolioShare);
-	  theWholeInfo.put(eachFile, portfolioShare);
+	  TreeMap<String, String> portfolioSharePercent =  new TreeMap<>();
+	  TreeMap<String, String> shareCount =  new TreeMap<>();
+	  parseRobinMonthlyDoc(eachFile, tickerSymbols, portfolioSharePercent, shareCount);
+	  theWholeInfoPercent.put(eachFile, portfolioSharePercent);
+	  theWholeInfoShares.put(eachFile,shareCount);
 //	  System.out.println(DELIMITER);
 	}
 	System.out.println("Ticker Symbols "+tickerSymbols);
 
 // replenishing stocks for data entry
-	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfo.entrySet()) {
+	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfoPercent.entrySet()) {
 	  replenishSymbols(eachME.getValue(), tickerSymbols);
 //	  System.out.println(eachME.getValue());
 	}
+	// For Shares
+	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfoShares.entrySet()) {
+	  replenishSymbols(eachME.getValue(), tickerSymbols);
+	}
 
 	System.out.println(DELIMITER);
-	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfo.entrySet()) {
+	printingData(theWholeInfoPercent);
+	System.out.println(DELIMITER);
+	printingData(theWholeInfoShares);
+
+	return;
+  }
+
+  private static void printingData(TreeMap<String, TreeMap<String, String>> theWholeInfoPercent) {
+	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfoPercent.entrySet()) {
 	  System.out.println("File Name "+eachME.getKey());
 	  for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
+//		if(!eachME1.getKey().equals("PortFolioValue") && !eachME1.getValue().equals("0.00%")){
 		if(!eachME1.getKey().equals("PortFolioValue")){
-//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
-		  System.out.println(eachME1.getValue());
+		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
+//		  System.out.println(eachME1.getValue());
 		}
 
 	  }
 	  System.out.println("Portfolio Value "+eachME.getValue().get("PortFolioValue"));
 	  System.out.println(DELIMITER);
 	}
-
-	return;
   }
 
   private static void replenishSymbols(TreeMap<String,String> monthValue, SortedSet<String> tickerSymbols) {
@@ -90,7 +105,7 @@ WORK
 	}
   }
 
-  private static void parseRobinMonthlyDoc(String fileName, SortedSet<String> tickerSymbols, TreeMap<String, String> portfolioShare )
+  private static void parseRobinMonthlyDoc(String fileName, SortedSet<String> tickerSymbols, TreeMap<String, String> portfolioSharePercentage,TreeMap<String, String> shareCount )
 	  throws IOException {
 	//Loading an existing document
 	File file = new File(fileName);
@@ -103,12 +118,12 @@ WORK
 	for (String eachLine : splitText) {
 	  if (patternChecker(eachLine) == 1) {
 //		System.out.println(eachLine);
-		extractTicker(tickerSymbols, eachLine, portfolioShare);
+		extractTicker(tickerSymbols, eachLine, portfolioSharePercentage, shareCount);
 	  } else if (patternChecker(eachLine) == 2) {
 //		System.out.println(DELIMITER);
 		String[] words = eachLine.split(" ");
 //		System.out.println(eachLine);
-		portfolioShare.put("PortFolioValue", words[3]);
+		portfolioSharePercentage.put("PortFolioValue", words[3]);
 //		System.out.println(DELIMITER);
 	  }
 
@@ -117,20 +132,22 @@ WORK
 	document.close();
   }
 
-  private static void extractTicker(SortedSet<String> tickerSymbols, String eachLine, TreeMap<String, String> portfolioShare) {
+  private static void extractTicker(SortedSet<String> tickerSymbols, String eachLine, TreeMap<String, String> portfolioSharePercentage, TreeMap<String, String> shareCount) {
 	// Fetching symbol from the portfolio
 	String[] words = eachLine.split(" ");
 	if(eachLine.contains("Estimated"))
 	{
 	  tickerSymbols.add(words[3]);
-//	  portfolioShare.put(words[3], words[9] +" : "+words[5]);
-	  portfolioShare.put(words[3], words[9]);
+//	  portfolioSharePercentage.put(words[3], words[9] +" : "+words[5]);
+	  portfolioSharePercentage.put(words[3], words[9]);
+	  shareCount.put(words[3], words[5]);
 	}
 	else
 	{
 	  tickerSymbols.add(words[0]);
-//	  portfolioShare.put(words[0], words[6] +" : "+words[2]);
-	  portfolioShare.put(words[0], words[6]);
+//	  portfolioSharePercentage.put(words[0], words[6] +" : "+words[2]);
+	  portfolioSharePercentage.put(words[0], words[6]);
+	  shareCount.put(words[0], words[2]);
 	}
   }
 
