@@ -1,6 +1,6 @@
 package com.Mar;
 
-import com.helper.LinkedList;
+import com.helper.LinkedListCustom;
 import com.helper.LinkedListNode;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +44,11 @@ class NetflixMergeSortList {
 
   public static void main(String[] args) {
 
-	LinkedListNode a = LinkedList.createLinkedList(new int[] {11,41,51});
+	LinkedListNode a = LinkedListCustom.createLinkedList(new int[] {11,41,51});
 
-	LinkedListNode b = LinkedList.createLinkedList(new int[] {21,23,42});
+	LinkedListNode b = LinkedListCustom.createLinkedList(new int[] {21,23,42});
 
-	LinkedListNode c = LinkedList.createLinkedList(new int[] {25,56,66,72});
+	LinkedListNode c = LinkedListCustom.createLinkedList(new int[] {25,56,66,72});
 
 	List<LinkedListNode> list1 = new ArrayList<LinkedListNode>();
 	list1.add(a);
@@ -56,6 +56,6 @@ class NetflixMergeSortList {
 	list1.add(c);
 
 	System.out.print("All movie ID's from best to worse are:\n");
-	LinkedList.display(mergeKCounty(list1));
+	LinkedListCustom.display(mergeKCounty(list1));
   }
 }

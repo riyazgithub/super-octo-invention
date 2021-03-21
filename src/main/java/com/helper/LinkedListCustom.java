@@ -2,7 +2,7 @@ package com.helper;
 import java.util.*;
 
 
-public class LinkedList {
+public class LinkedListCustom {
 
   public static LinkedListNode insertAtHead(LinkedListNode head, int data) {
 	LinkedListNode newNode = new LinkedListNode(data);
