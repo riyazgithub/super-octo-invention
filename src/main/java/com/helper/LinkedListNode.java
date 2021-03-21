@@ -27,4 +27,12 @@ public class LinkedListNode {
 	this.next = next;
 	this.arbitraryPointer = arbitraryPointer;
   }
+
+    @Override
+    public String toString() {
+        return "LinkedListNode{" +
+                "key=" + key +
+                ", data=" + data +
+                '}';
+    }
 }
