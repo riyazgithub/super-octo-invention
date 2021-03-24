@@ -44,7 +44,7 @@ public class NetflixGroupSimilarTitles {
 
 	List<List<String>> gt = groupTitles(titles);
 	String query = "spede";
-
+	  System.out.println("GT "+gt);
 	// Searching for all titles
 	for (List<String> g : gt){
 	  if (g.contains(query))
