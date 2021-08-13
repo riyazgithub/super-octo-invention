@@ -18,19 +18,24 @@ public class readingFromPDF {
   public static final String[] FILES = {
 	  "/Users/rafthab/Downloads/Finance/Robinhood/Dec2019.pdf",
 	  "/Users/rafthab/Downloads/Finance/Robinhood/Jan2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Feb2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Mar2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/APR2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/MAY2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Jun2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Aug2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/SEP2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Oct2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Nov2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Dec2020.pdf",
-//	  "/Users/rafthab/Downloads/Finance/Robinhood/Jan2021.pdf",
-	  "/Users/rafthab/Downloads/Finance/Robinhood/Feb2021.pdf"
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Feb2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Mar2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/APR2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/MAY2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Jun2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Aug2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/SEP2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Oct2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Nov2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Dec2020.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Jan2021.pdf",
+	  "/Users/rafthab/Downloads/Finance/Robinhood/Feb2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/MAR2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/APR2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/MAY2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Jun2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2021.pdf"
   };
 
   public static final String DELIMITER = "========================================================";
@@ -73,24 +78,27 @@ WORK
 	  replenishSymbols(eachME.getValue(), tickerSymbols);
 	}
 
+
 	System.out.println(DELIMITER);
-	printingData(theWholeInfoPercent);
+	printingData(theWholeInfoPercent, "Jul2021");
 	System.out.println(DELIMITER);
-	printingData(theWholeInfoShares);
+	printingData(theWholeInfoShares, "Jul2021");
 
 	return;
   }
 
-  private static void printingData(TreeMap<String, TreeMap<String, String>> theWholeInfoPercent) {
+  private static void printingData(TreeMap<String, TreeMap<String, String>> theWholeInfoPercent, String fileName) {
 	for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfoPercent.entrySet()) {
 	  System.out.println("File Name "+eachME.getKey());
-	  for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
+	  if(eachME.getKey().contains(fileName))
+	  {
+		  for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
 //		if(!eachME1.getKey().equals("PortFolioValue") && !eachME1.getValue().equals("0.00%")){
-		if(!eachME1.getKey().equals("PortFolioValue")){
-		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
-//		  System.out.println(eachME1.getValue());
-		}
-
+			  if(!eachME1.getKey().equals("PortFolioValue")){
+//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue()); // Stock ticker : Number of shares
+				  System.out.println(eachME1.getValue()); // number of shares
+			  }
+		  }
 	  }
 	  System.out.println("Portfolio Value "+eachME.getValue().get("PortFolioValue"));
 	  System.out.println(DELIMITER);
@@ -123,8 +131,11 @@ WORK
 //		System.out.println(DELIMITER);
 		String[] words = eachLine.split(" ");
 //		System.out.println(eachLine);
+
 		portfolioSharePercentage.put("PortFolioValue", words[3]);
 //		System.out.println(DELIMITER);
+	  } else {
+//		  System.out.println("Ecluded >>>>>>>>>>>>>>>>  " +eachLine);
 	  }
 
 	}
@@ -132,15 +143,16 @@ WORK
 	document.close();
   }
 
-  private static void extractTicker(SortedSet<String> tickerSymbols, String eachLine, TreeMap<String, String> portfolioSharePercentage, TreeMap<String, String> shareCount) {
+  private static void
+  extractTicker(SortedSet<String> tickerSymbols, String eachLine, TreeMap<String, String> portfolioSharePercentage, TreeMap<String, String> shareCount) {
 	// Fetching symbol from the portfolio
 	String[] words = eachLine.split(" ");
-	if(eachLine.contains("Estimated"))
+	if(eachLine.contains("Estimated") && !words[5].equals("1"))
 	{
-	  tickerSymbols.add(words[3]);
+		tickerSymbols.add(words[3]);
 //	  portfolioSharePercentage.put(words[3], words[9] +" : "+words[5]);
-	  portfolioSharePercentage.put(words[3], words[9]);
-	  shareCount.put(words[3], words[5]);
+		portfolioSharePercentage.put(words[3], words[9]);
+		shareCount.put(words[3], words[5]);
 	}
 	else
 	{
@@ -164,8 +176,10 @@ WORK
 	String excludePattern3 = " Sell ";
 	String excludePattern4 = "ACH ";
 	String excludePattern5 = " CDIV ";
-	String excludePattern6 = "Crypto Money";
-	String excludePattern7 = "Unsolicited";
+	  String excludePattern6 = "Crypto Money";
+	  String excludePattern7 = "Unsolicited";
+	  String excludePattern8 = "Call";
+	  String excludePattern9 = "BTO";
 
 
 
@@ -180,8 +194,10 @@ WORK
 	Pattern excPattern3 = Pattern.compile(excludePattern3);
 	Pattern excPattern4 = Pattern.compile(excludePattern4);
 	Pattern excPattern5 = Pattern.compile(excludePattern5);
-	Pattern excPattern6 = Pattern.compile(excludePattern6);
-	Pattern excPattern7 = Pattern.compile(excludePattern7);
+	  Pattern excPattern6 = Pattern.compile(excludePattern6);
+	  Pattern excPattern7 = Pattern.compile(excludePattern7);
+	  Pattern excPattern8 = Pattern.compile(excludePattern8);
+	  Pattern excPattern9 = Pattern.compile(excludePattern9);
 
 	// include
 	Matcher matcher1 = pattern1.matcher(str);
@@ -197,9 +213,11 @@ WORK
 	Matcher excludematcher5 = excPattern5.matcher(str);
 	Matcher excludematcher6 = excPattern6.matcher(str);
 	Matcher excludematcher7 = excPattern7.matcher(str);
+	  Matcher excludematcher8 = excPattern8.matcher(str);
+	  Matcher excludematcher9 = excPattern9.matcher(str);
 
 	if (matcher1.find() && !(excludematcher1.find() || excludematcher2.find() || excludematcher3
-		.find() || excludematcher4.find() || excludematcher5.find() || excludematcher6.find() || excludematcher7.find())) {
+		.find() || excludematcher4.find() || excludematcher5.find() || excludematcher6.find() || excludematcher7.find()|| excludematcher8.find() || excludematcher9.find())) {
 	  returnPattern = 1;
 	} else if (matcher3.find()) {
 	  returnPattern = 2;
