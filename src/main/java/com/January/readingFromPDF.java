@@ -35,7 +35,8 @@ public class readingFromPDF {
 		  "/Users/rafthab/Downloads/Finance/Robinhood/APR2021.pdf",
 		  "/Users/rafthab/Downloads/Finance/Robinhood/MAY2021.pdf",
 		  "/Users/rafthab/Downloads/Finance/Robinhood/Jun2021.pdf",
-		  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2021.pdf"
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Aug2021.pdf"
   };
 
   public static final String DELIMITER = "========================================================";
@@ -80,9 +81,9 @@ WORK
 
 
 	System.out.println(DELIMITER);
-	printingData(theWholeInfoPercent, "Jul2021");
+	printingData(theWholeInfoPercent, "Aug2021");
 	System.out.println(DELIMITER);
-	printingData(theWholeInfoShares, "Jul2021");
+	printingData(theWholeInfoShares, "Aug2021");
 
 	return;
   }
@@ -95,8 +96,10 @@ WORK
 		  for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
 //		if(!eachME1.getKey().equals("PortFolioValue") && !eachME1.getValue().equals("0.00%")){
 			  if(!eachME1.getKey().equals("PortFolioValue")){
-//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue()); // Stock ticker : Number of shares
-				  System.out.println(eachME1.getValue()); // number of shares
+				  // Stock ticker : Number of shares
+//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
+				  // number of shares (with out ticker)
+				  System.out.println(eachME1.getValue());
 			  }
 		  }
 	  }
