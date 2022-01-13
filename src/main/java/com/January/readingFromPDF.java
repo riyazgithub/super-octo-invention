@@ -36,7 +36,10 @@ public class readingFromPDF {
 		  "/Users/rafthab/Downloads/Finance/Robinhood/MAY2021.pdf",
 		  "/Users/rafthab/Downloads/Finance/Robinhood/Jun2021.pdf",
 		  "/Users/rafthab/Downloads/Finance/Robinhood/Jul2021.pdf",
-		  "/Users/rafthab/Downloads/Finance/Robinhood/Aug2021.pdf"
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Aug2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Sep2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Oct2021.pdf",
+		  "/Users/rafthab/Downloads/Finance/Robinhood/Nov2021.pdf"
   };
 
   public static final String DELIMITER = "========================================================";
@@ -79,11 +82,17 @@ WORK
 	  replenishSymbols(eachME.getValue(), tickerSymbols);
 	}
 
+	String month = "Nov2021";
 
 	System.out.println(DELIMITER);
-	printingData(theWholeInfoPercent, "Aug2021");
+	printingData(theWholeInfoPercent, month);
 	System.out.println(DELIMITER);
-	printingData(theWholeInfoShares, "Aug2021");
+	printingData(theWholeInfoShares, month);
+
+	  System.out.println(DELIMITER);
+	  printingDataWithoutTicker(theWholeInfoPercent, month);
+	  System.out.println(DELIMITER);
+	  printingDataWithoutTicker(theWholeInfoShares, month);
 
 	return;
   }
@@ -97,9 +106,7 @@ WORK
 //		if(!eachME1.getKey().equals("PortFolioValue") && !eachME1.getValue().equals("0.00%")){
 			  if(!eachME1.getKey().equals("PortFolioValue")){
 				  // Stock ticker : Number of shares
-//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
-				  // number of shares (with out ticker)
-				  System.out.println(eachME1.getValue());
+		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
 			  }
 		  }
 	  }
@@ -108,6 +115,26 @@ WORK
 	}
   }
 
+	private static void printingDataWithoutTicker(TreeMap<String, TreeMap<String, String>> theWholeInfoPercent, String fileName) {
+		for(Map.Entry<String, TreeMap<String, String>> eachME : theWholeInfoPercent.entrySet()) {
+			System.out.println("File Name "+eachME.getKey());
+			if(eachME.getKey().contains(fileName))
+			{
+				for(Map.Entry<String, String> eachME1 : eachME.getValue().entrySet()){
+//		if(!eachME1.getKey().equals("PortFolioValue") && !eachME1.getValue().equals("0.00%")){
+					if(!eachME1.getKey().equals("PortFolioValue")){
+						// Stock ticker : Number of shares
+//		  System.out.println(eachME1.getKey() + " " +eachME1.getValue());
+						// number of shares (with out ticker)
+						System.out.println(eachME1.getValue());
+					}
+				}
+			}
+			System.out.println("Portfolio Value "+eachME.getValue().get("PortFolioValue"));
+			System.out.println(DELIMITER);
+		}
+	}
+	
   private static void replenishSymbols(TreeMap<String,String> monthValue, SortedSet<String> tickerSymbols) {
     for (String sym : tickerSymbols) {
       if(monthValue.get(sym) == null){
@@ -148,22 +175,27 @@ WORK
 
   private static void
   extractTicker(SortedSet<String> tickerSymbols, String eachLine, TreeMap<String, String> portfolioSharePercentage, TreeMap<String, String> shareCount) {
-	// Fetching symbol from the portfolio
-	String[] words = eachLine.split(" ");
-	if(eachLine.contains("Estimated") && !words[5].equals("1"))
-	{
-		tickerSymbols.add(words[3]);
+	  try {
+		  // Fetching symbol from the portfolio
+		  String[] words = eachLine.split(" ");
+		  if(eachLine.contains("Estimated") && !words[5].equals("1"))
+		  {
+			  tickerSymbols.add(words[3]);
 //	  portfolioSharePercentage.put(words[3], words[9] +" : "+words[5]);
-		portfolioSharePercentage.put(words[3], words[9]);
-		shareCount.put(words[3], words[5]);
-	}
-	else
-	{
-	  tickerSymbols.add(words[0]);
+			  portfolioSharePercentage.put(words[3], words[9]);
+			  shareCount.put(words[3], words[5]);
+		  }
+		  else if (words.length > 6)
+		  {
+			  tickerSymbols.add(words[0]);
 //	  portfolioSharePercentage.put(words[0], words[6] +" : "+words[2]);
-	  portfolioSharePercentage.put(words[0], words[6]);
-	  shareCount.put(words[0], words[2]);
-	}
+			  portfolioSharePercentage.put(words[0], words[6]);
+			  shareCount.put(words[0], words[2]);
+		  }
+	  } catch (Exception exception)
+	  {
+		  exception.printStackTrace();
+	  }
   }
 
   private static int patternChecker(String str) {
