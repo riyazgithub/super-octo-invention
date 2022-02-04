@@ -1,6 +1,6 @@
 package com.year2021.Mar;
 
-import com.year2021.helper.LinkedListNode;
+import com.year2021.LinkedListNode;
 
 import java.util.HashMap;
 import java.util.LinkedList;

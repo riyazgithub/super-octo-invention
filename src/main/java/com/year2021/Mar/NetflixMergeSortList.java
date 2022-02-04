@@ -1,7 +1,8 @@
 package com.year2021.Mar;
 
-import com.year2021.helper.LinkedListCustom;
-import com.year2021.helper.LinkedListNode;
+import com.year2021.LinkedListCustom;
+import com.year2021.LinkedListNode;
+
 import java.util.ArrayList;
 import java.util.List;
 

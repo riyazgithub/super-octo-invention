@@ -1,6 +1,6 @@
 package com.year2021.Mar;
 
-import com.year2021.helper.maxStack;
+import com.year2020.helper.maxStack;
 
 public class BrowserRating {
     public static void main(String[] args) {

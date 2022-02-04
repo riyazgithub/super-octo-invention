@@ -1,7 +1,7 @@
 package com.year2020;
 
-import com.year2021.helper.BST;
-import com.year2021.helper.TreeNode;
+import com.year2020.helper.BST;
+import com.year2020.helper.TreeNode;
 import java.util.HashMap;
 
 class Solution_Feb23 {

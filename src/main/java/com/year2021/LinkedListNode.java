@@ -1,4 +1,4 @@
-package com.year2021.helper;
+package com.year2021;
 
 public class LinkedListNode {
   public int key;
